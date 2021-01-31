@@ -4,6 +4,7 @@ import * as esbuild from 'esbuild-wasm';
 
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import { unpkgPathPlugin } from './plugins/unpkg-path-plugin';
 
 const App = () => {
   // NOTE: useRef hook is normally use to access DOM elements but it can be also
@@ -13,7 +14,7 @@ const App = () => {
 
   const [input, setInput] = useState('');
 
-  // code state is going to be the Output from our ES build tool which is transpile & bundled code
+  // code state is going to be the Output from our ES build tool which is transpiled & bundled code
   // that will be display in pre element.
   const [code, setCode] = useState('');
 
@@ -38,29 +39,43 @@ const App = () => {
     setInput(e.target.value);
   };
 
-  const handleClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.preventDefault();
 
     // Check to make sure that we never attempt to do any transpiling unless we are 100% sure
     // that we have already initialized our service.
     // If there is no ref.current or if the value is undefined or null - falsy
     if (!ref.current) {
+      // saying the same thing - null or undefined
       // This will handle a case when a user might start up our application &
       // instantly start clicking on the SUBMIT button.
       // If user click right away before our service is ready, will end up error message
       return;
     }
 
-    // transform func will do ony the transpiling 
+    // transform func will do ony the transpiling
     // first arg is the code that we want to transpile
     // second arg is the 'options object' during the transpiling process
-    const result = await ref.current.transform(input, {
-      loader: 'jsx', // to tell es build what kind a code we are providing to it
-      target: 'es2015'
-    })
+    // const result = await ref.current.transform(input, {
+    //   loader: 'jsx', // to tell es build what kind a code we are providing to it
+    //   target: 'es2015',
+    // });
 
-    // 'code' property contains transpile code
-    setCode(result.code)
+    // we want to do bundling now with plugin file
+    const result = await ref.current.build({
+      entryPoints: ['index.js'], // first one to be bundle inside of our app
+      bundle: true,
+      write: false,
+      // this the function in unpkg-path-plugin
+      plugins: [unpkgPathPlugin()],
+    });
+
+    console.log(result);
+
+    // 'code' property contains transpile code & now setting it into our state - code
+    setCode(result.outputFiles[0].text);
 
     setInput('');
   };
