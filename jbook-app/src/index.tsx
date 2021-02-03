@@ -1,3 +1,4 @@
+import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import * as esbuild from 'esbuild-wasm';
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
@@ -65,7 +66,7 @@ const App = () => {
   return (
     <div>
       <CodeEditor
-        initialValue='Hello World'
+        initialValue='const a = 1'
         // when user writes on editor, updating input component state
         onChange={value => setInput(value)}
       />
