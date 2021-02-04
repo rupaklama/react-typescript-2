@@ -1,10 +1,14 @@
 import './code-editor.css';
+import './syntax.css';
 import { useRef } from 'react';
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react';
 import prettier from 'prettier';
 
 // parser for javascript code
 import parser from 'prettier/parser-babel';
+
+import codeshift from 'jscodeshift';
+import Highlighter from 'monaco-jsx-highlighter';
 
 interface CodeEditorProps {
   initialValue: string;
@@ -31,6 +35,22 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
 
     // setting tab position to 2 spaces
     monacoEditor.getModel()?.updateOptions({ tabSize: 2 });
+
+    // setting up highlighter
+    const highlighter = new Highlighter(
+      // @ts-ignore - do not attempt to type check next line of code
+      window.monaco,
+      codeshift,
+      monacoEditor
+    );
+    // when content changes highlight syntax
+    highlighter.highLightOnDidChangeModelContent(
+      // to not to console log all errors
+      () => {},
+      () => {},
+      undefined,
+      () => {}
+    );
   };
 
   const onFormatClick = () => {
