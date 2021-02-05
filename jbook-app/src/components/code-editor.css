@@ -1,6 +1,7 @@
 .editor-wrapper {
   position: relative;
   height: 100%;
+  width: calc(100% - 10px);
 }
 
 .editor-wrapper .button-format {
@@ -8,13 +9,10 @@
   top: 5px;
   right: 5px;
   z-index: 20;
-  /* button to have opacity of default 0 */
   opacity: 0;
-  /* slowly change value of opacity within 3 secs */
   transition: opacity 0.3s;
 }
 
 .editor-wrapper:hover .button-format {
-  /* if we ever hover over the editor, we want to change the opacity to 1.0 - full color */
   opacity: 1;
 }
