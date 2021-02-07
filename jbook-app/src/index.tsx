@@ -1,12 +1,17 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
 import ReactDOM from 'react-dom';
-import CodeCell from './components/code-cell';
+
+// additional package require for react-redux to work with typescript: npm i --save-dev @types/react-redux
+// type definition file
+import { Provider } from 'react-redux';
+import { store } from './state';
+import TextEditor from './components/text-editor';
 
 const App = () => {
   return (
-    <div>
-      <CodeCell />
-    </div>
+    <Provider store={store}>
+      <TextEditor />
+    </Provider>
   );
 };
 
