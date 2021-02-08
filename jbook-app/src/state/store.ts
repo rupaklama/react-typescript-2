@@ -8,6 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // redux thunk middleware
 import thunk from 'redux-thunk';
+import { ActionType } from './actions/cellsAction';
 
 // all our reducers
 import { reducers } from './reducers';
@@ -24,3 +25,18 @@ export const store = createStore(
   initialState,
   composeWithDevTools(applyMiddleware(...middleware))
 );
+
+// Typescript might think 'state' could be undefined
+// To prevent this, add 'return state' in switch cases
+// const state = store.getState();
+
+// Manual dispatching of Actions for Testing of a Redux Store
+store.dispatch({
+  type: ActionType.INSERT_CELL_BEFORE,
+  payload: {
+    id: null,
+    type: 'code',
+  },
+});
+
+// console.log(store.getState());
