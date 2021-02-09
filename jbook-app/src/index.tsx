@@ -4,13 +4,13 @@ import ReactDOM from 'react-dom';
 // additional package require for react-redux to work with typescript: npm i --save-dev @types/react-redux
 // type definition file
 import { Provider } from 'react-redux';
-import { store } from './state';
-import TextEditor from './components/text-editor';
+import CellList from './components/cell-list';
+import { store } from './state/store';
 
 const App = () => {
   return (
     <Provider store={store}>
-      <TextEditor />
+      <CellList />
     </Provider>
   );
 };

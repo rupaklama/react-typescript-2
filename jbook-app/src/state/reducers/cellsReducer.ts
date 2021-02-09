@@ -1,6 +1,7 @@
 // 'produce' function helps to mutate state directly in redux
 // to directly update our state
 import produce from 'immer';
+import { v4 as uuidv4 } from 'uuid';
 import { ActionType, Action } from '../actions/cellsAction';
 import { Cell } from '../cell';
 
@@ -69,7 +70,7 @@ export const cellsReducer = produce(
         const cell: Cell = {
           content: '',
           type: action.payload.type,
-          id: randomId(),
+          id: uuidv4(),
         };
 
         state.data[cell.id] = cell;
@@ -89,6 +90,6 @@ export const cellsReducer = produce(
   }
 );
 
-const randomId = () => {
-  return Math.random().toString(36).substr(2, 5);
-};
+// const randomId = () => {
+//   return Math.random().toString(36).substr(2, 5);
+// };
