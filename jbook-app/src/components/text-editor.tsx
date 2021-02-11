@@ -1,11 +1,20 @@
 import './text-editor.css';
 import MDEditor from '@uiw/react-md-editor';
 import { useState, useEffect, useRef } from 'react';
+import { Cell } from '../state/cell';
+import { useDispatch } from 'react-redux';
+import { updateCell } from '../state/actions/cellsAction';
 
-const TextEditor: React.FC = () => {
+interface TextEditorProps {
+  cell: Cell;
+}
+
+const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
   const ref = useRef<HTMLDivElement | null>(null);
-  const [value, setValue] = useState('Start writing on this editor...');
+
   const [editing, setEditing] = useState(false);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // this func will be call whenever user clicks anywhere inside of our Document
@@ -48,7 +57,10 @@ const TextEditor: React.FC = () => {
       // To do so, add on a 'ref' here & determine whether or not
       // 'e.target' is an element inside of this div
       <div ref={ref} className='text-editor'>
-        <MDEditor value={value} onChange={v => setValue(v || '')} />
+        <MDEditor
+          value={cell.content}
+          onChange={v => dispatch(updateCell(cell.id, v || ''))}
+        />
       </div>
     );
   }
@@ -57,7 +69,7 @@ const TextEditor: React.FC = () => {
     // preview window
     <div onClick={handleClick} className='text-editor card'>
       <div className='card-content'>
-        <MDEditor.Markdown source={value} />
+        <MDEditor.Markdown source={cell.content || 'Click to edit'} />
       </div>
     </div>
   );

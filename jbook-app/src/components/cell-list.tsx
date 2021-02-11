@@ -15,6 +15,8 @@ const CellList: React.FC = () => {
     });
   });
 
+  // console.log(cells);
+
   const renderedCells = cells.map(cell => (
     <CellListItem key={cell.id} cell={cell} />
   ));

@@ -1,4 +1,5 @@
 import 'bulmaswatch/superhero/bulmaswatch.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 import ReactDOM from 'react-dom';
 
 // additional package require for react-redux to work with typescript: npm i --save-dev @types/react-redux
