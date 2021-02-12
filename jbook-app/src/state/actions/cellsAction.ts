@@ -28,7 +28,7 @@ interface DeleteCellAction {
 interface InsertCellBeforeAction {
   type: ActionType.INSERT_CELL_BEFORE;
   payload: {
-    id: string | null;
+    id: string | null; // null to add cell to the end of Order array
     type: CellTypes;
   };
 }
@@ -81,6 +81,7 @@ export const moveCell = (
   };
 };
 
+// to insert new cell before current cell
 export const insertCellBefore = (
   id: string,
   cellType: CellTypes
