@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import './cell-list.css';
 
 // custom hook to access state in our redux store
 import { useTypedSelector } from '../hooks/use-type-selector';
+import AddCell from './add-cell';
 
 import CellListItem from './cell-list-item';
 
@@ -23,10 +25,24 @@ const CellList: React.FC = () => {
 
   // rendering list of cells
   const renderedCells = cells.map(cell => (
-    <CellListItem key={cell.id} cell={cell} />
+    <Fragment key={cell.id}>
+      <AddCell nextCellId={cell.id} />
+      <CellListItem cell={cell} />
+    </Fragment>
   ));
 
-  return <div>{renderedCells}</div>;
+  return (
+    <div>
+      {renderedCells}
+
+      {/* <div className={cells.length === 0 ? 'force-visible' : ''}>
+        <AddCell nextCellId={null} />
+      </div> */}
+
+      {/* same as above  */}
+      <AddCell isForceVisible={cells.length === 0} nextCellId={null} />
+    </div>
+  );
 };
 
 export default CellList;

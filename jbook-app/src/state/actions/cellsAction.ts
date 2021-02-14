@@ -83,7 +83,7 @@ export const moveCell = (
 
 // to insert new cell before current cell
 export const insertCellBefore = (
-  id: string,
+  id: string | null,
   cellType: CellTypes
 ): InsertCellBeforeAction => {
   return {
