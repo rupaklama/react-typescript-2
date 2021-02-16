@@ -79,7 +79,7 @@ export const cellsReducer = produce(
 
         return state;
 
-      case ActionType.INSERT_CELL_BEFORE:
+      case ActionType.INSERT_CELL_AFTER:
         // to create a new cell to add before current cell or at the end
         const cell: Cell = {
           content: '',
@@ -98,11 +98,11 @@ export const cellsReducer = produce(
         // edge case
         // if less than 0 results in an error (-1)
         if (foundIndex < 0) {
-          // to add to the end of array
-          state.order.push(cell.id);
+          // to add to the start        of array
+          state.order.unshift(cell.id);
         } else {
           // to add new cell before current cell
-          state.order.splice(foundIndex, 0, cell.id);
+          state.order.splice(foundIndex + 1, 0, cell.id);
           // The splice() method changes the contents of an array by removing or replacing existing elements
           // and/or adding new elements in place.
         }

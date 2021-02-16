@@ -4,7 +4,7 @@ import { CellTypes } from './../cell';
 export enum ActionType {
   MOVE_CELL = 'MOVE_CELL',
   DELETE_CELL = 'DELETE_CELL',
-  INSERT_CELL_BEFORE = 'INSERT_CELL_BEFORE',
+  INSERT_CELL_AFTER = 'INSERT_CELL_AFTER',
   UPDATE_CELL = 'UPDATE_CELL',
 }
 
@@ -25,8 +25,8 @@ interface DeleteCellAction {
   payload: string;
 }
 
-interface InsertCellBeforeAction {
-  type: ActionType.INSERT_CELL_BEFORE;
+interface InsertCellAfterAction {
+  type: ActionType.INSERT_CELL_AFTER;
   payload: {
     id: string | null; // null to add cell to the end of Order array
     type: CellTypes;
@@ -47,7 +47,7 @@ interface UpdateCellAction {
 export type Action =
   | MoveCellAction
   | DeleteCellAction
-  | InsertCellBeforeAction
+  | InsertCellAfterAction
   | UpdateCellAction;
 
 // action creators
@@ -82,12 +82,12 @@ export const moveCell = (
 };
 
 // to insert new cell before current cell
-export const insertCellBefore = (
+export const insertCellAfter = (
   id: string | null,
   cellType: CellTypes
-): InsertCellBeforeAction => {
+): InsertCellAfterAction => {
   return {
-    type: ActionType.INSERT_CELL_BEFORE,
+    type: ActionType.INSERT_CELL_AFTER,
     payload: {
       id,
       type: cellType,

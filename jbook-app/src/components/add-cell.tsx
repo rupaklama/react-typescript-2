@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { insertCellBefore } from '../state/actions/cellsAction';
+import { insertCellAfter } from '../state/actions/cellsAction';
 import './add-cell.css';
 
 interface AddCellProps {
@@ -12,11 +12,11 @@ const AddCell: React.FC<AddCellProps> = ({ nextCellId, isForceVisible }) => {
   const dispatch = useDispatch();
 
   const handleCode = () => {
-    dispatch(insertCellBefore(nextCellId, 'code'));
+    dispatch(insertCellAfter(nextCellId, 'code'));
   };
 
   const handleText = () => {
-    dispatch(insertCellBefore(nextCellId, 'text'));
+    dispatch(insertCellAfter(nextCellId, 'text'));
   };
 
   return (
