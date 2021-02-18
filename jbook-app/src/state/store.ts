@@ -8,7 +8,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 // redux thunk middleware
 import thunk from 'redux-thunk';
-import { ActionType } from './actions/cellsAction';
+import { ActionType } from './actions/actionTypes';
 
 // all our reducers
 import { reducers } from './reducers';

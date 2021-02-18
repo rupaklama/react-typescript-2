@@ -1,7 +1,8 @@
 // 'produce' function helps to mutate state directly in redux to directly update our state
 import produce from 'immer';
 import { v4 as uuidv4 } from 'uuid';
-import { ActionType, Action } from '../actions/cellsAction';
+import { ActionType } from '../actions/actionTypes';
+import { CellsAction } from '../actions/cellsAction';
 import { Cell } from '../cell';
 
 // interface reducer state
@@ -34,7 +35,7 @@ const initialState: CellsState = {
 // wrapping entire reducer function with 'producer' so that we can mutate state directly &
 // don't have to create traditional way of brand new object with '...' spread operator
 export const cellsReducer = produce(
-  (state: CellsState = initialState, action: Action) => {
+  (state: CellsState = initialState, action: CellsAction) => {
     switch (action.type) {
       case ActionType.UPDATE_CELL:
         const { id, content } = action.payload;

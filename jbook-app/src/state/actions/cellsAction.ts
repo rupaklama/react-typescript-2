@@ -1,12 +1,5 @@
+import { ActionType } from './actionTypes';
 import { CellTypes } from './../cell';
-
-// Enums for all action types
-export enum ActionType {
-  MOVE_CELL = 'MOVE_CELL',
-  DELETE_CELL = 'DELETE_CELL',
-  INSERT_CELL_AFTER = 'INSERT_CELL_AFTER',
-  UPDATE_CELL = 'UPDATE_CELL',
-}
 
 // type alias for direction
 type Direction = 'up' | 'down';
@@ -44,7 +37,7 @@ interface UpdateCellAction {
 // NOTE: 'Type union' can be very long, we can use 'Type Alias' if we want instead.
 // 'Type Alias' is just a name that represents another Type, similar to variable but for type.
 // 'Type Alias' is to create New Name for another Type.
-export type Action =
+export type CellsAction =
   | MoveCellAction
   | DeleteCellAction
   | InsertCellAfterAction
