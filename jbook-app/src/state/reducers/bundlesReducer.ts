@@ -1,18 +1,19 @@
 import { BundlesAction } from './../actions/bundleAction';
 import produce from 'immer';
 import { ActionType } from '../actions/actionTypes';
-import { act } from 'react-dom/test-utils';
 
 // reducer state
 interface BundlesState {
   // storing data in object - {} with key/value pair
   // Indexable types have an 'index signature' that describes the types we can use to index into the object,
   // along with the corresponding return types when indexing.
-  [key: string]: {
-    loading: boolean; // to process bundling
-    code: string;
-    err: string;
-  };
+  [key: string]:
+    | {
+        loading: boolean; // to process bundling
+        code: string;
+        err: string;
+      }
+    | undefined;
 
   // Typescript and Javascript support indexing by 'Number' as in arrays and
   // by 'String' as in associative arrays or Object ({} ) instances
