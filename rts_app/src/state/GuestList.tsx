@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 const GuestList: React.FC = () => {
   const [name, setName] = useState('');
-  // never[] - typescript assumes this is array which is going to be forever 'empty'
+  // never[] - typescript has no idea about the array values
   // default type definition , Generic <S> to be Array of Strings here
   const [guests, setGuests] = useState<string[]>([]);
   // console.log(guests);
