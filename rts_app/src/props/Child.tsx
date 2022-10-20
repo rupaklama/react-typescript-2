@@ -2,6 +2,9 @@
 interface ChildProps {
   color: string;
   onClick: () => void; // since its onClick function, we might don't need to return any value
+  
+  // React 18 introduces a breaking change with the removal of implicit children in React.FunctionComponent types.
+  children?: React.ReactNode;
 }
 
 export const Child = ({color, onClick}: ChildProps) => {
